@@ -4,8 +4,6 @@ env:
 on:
   workflow_dispatch:
     inputs: {}
-  schedule:
-    - cron: "0 0 * * 5"
 
 permissions:
   contents: read
@@ -15,7 +13,7 @@ jobs:
     name: Update parser test262 tests
     permissions:
       contents: write # for Git to git push
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4

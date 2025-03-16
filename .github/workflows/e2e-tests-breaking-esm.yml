@@ -16,7 +16,7 @@ concurrency:
 jobs:
   e2e-publish:
     name: Publish to local Verdaccio registry
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
   e2e-tests:
     name: Test
     needs: e2e-publish
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:

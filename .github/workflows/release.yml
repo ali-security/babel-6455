@@ -22,7 +22,7 @@ permissions:
 jobs:
   check-release-type:
     name: Check the release type
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       is-babel-8: >-
         ${{
@@ -37,7 +37,7 @@ jobs:
 
   log-updates:
     name: Log packages to publish
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: check-release-type
     if: needs.check-release-type.outputs.is-babel-8 == 'false'
     steps:
@@ -57,7 +57,7 @@ jobs:
     permissions:
       contents: write # for Git to git push
     name: Create git tag and commit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: check-release-type
     if: github.event_name == 'workflow_dispatch'
     outputs:
@@ -96,7 +96,7 @@ jobs:
 
   npm-release:
     name: Build, Test and Publish
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - check-release-type
       - git-version
@@ -166,7 +166,7 @@ jobs:
 
   github-release:
     name: Create GitHub release draft
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - check-release-type
       - git-version
@@ -233,7 +233,7 @@ jobs:
     permissions:
       contents: write # for Git to git push
     name: Push release commit to "main"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - npm-release
       - github-release
@@ -280,7 +280,7 @@ jobs:
 
   types-docs-updates:
     name: Update Babel types docs
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - check-release-type
       - github-release

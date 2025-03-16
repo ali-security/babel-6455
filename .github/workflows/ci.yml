@@ -12,7 +12,7 @@ concurrency:
 jobs:
   prepare-yarn-cache:
     name: Prepare Cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
   yarn-validate:
     name: Validate Yarn dependencies and constraints
     needs: prepare-yarn-cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
   test-coverage:
     name: Test on Node.js Latest
     needs: prepare-yarn-cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -84,7 +84,7 @@ jobs:
   test-esm:
     name: Test ESM version
     needs: prepare-yarn-cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -108,7 +108,7 @@ jobs:
   build:
     name: Build Babel Artifacts
     needs: prepare-yarn-cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     # Yarn PnP does not support native ESM yet (https://github.com/yarnpkg/berry/issues/638)
     # env:
     #    YARN_NODE_LINKER: pnp # use pnp linker for better linking performance and stricter checks
@@ -148,7 +148,7 @@ jobs:
 
   build-windows:
     name: Build Babel Artifacts on Windows
-    runs-on: windows-latest
+    runs-on: windows-2022
     # Yarn PnP does not support native ESM yet (https://github.com/yarnpkg/berry/issues/638)
     # env:
     #    YARN_NODE_LINKER: pnp # use pnp linker for better linking performance and stricter checks
@@ -176,7 +176,7 @@ jobs:
   lint:
     name: Lint
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -202,7 +202,7 @@ jobs:
   test:
     name: Test on Node.js # GitHub will add ${{ matrix.node-version }} to this title
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -264,7 +264,7 @@ jobs:
   build-babel8:
     name: Build Babel 8 Artifacts
     needs: prepare-yarn-cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     # Yarn PnP does not support native ESM yet (https://github.com/yarnpkg/berry/issues/638)
     # env:
     #    YARN_NODE_LINKER: pnp # use pnp linker for better linking performance and stricter checks
@@ -307,7 +307,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-22.04, windows-2022, macos-latest]
     runs-on: ${{ matrix.os }}
     env:
       YARN_IGNORE_NODE: 1
@@ -345,7 +345,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest]
+        os: [windows-2022, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -372,7 +372,7 @@ jobs:
   external-parser-tests:
     name: Third-party Parser Tests
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -401,7 +401,7 @@ jobs:
   runtime-interop:
     name: Test @babel/runtime integrations
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -508,7 +508,7 @@ jobs:
   eslint7-test:
     name: Test @babel/eslint-* with ESLint 7.5.0
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -532,7 +532,7 @@ jobs:
 
   test262-prepare:
     name: test262 - Prepare for running in parallel
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.repository == 'babel/babel'
     steps:
       - name: Checkout Babel
@@ -569,7 +569,7 @@ jobs:
     strategy:
       matrix:
         chunk: [0, 1, 2, 3, 4, 5, 6, 7]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: [build, test262-prepare]
     steps:
       - name: Checkout Babel
@@ -622,7 +622,7 @@ jobs:
 
   test262-finish:
     name: test262 - Analyze results
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: test262
     steps:
       - uses: actions/download-artifact@v3

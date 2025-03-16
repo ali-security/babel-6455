@@ -1,7 +1,5 @@
 name: Open issue to remind doing something
 on:
-  schedule:
-    - cron: 0 0 15 07 *
 
 permissions:
   issues: write
@@ -9,7 +7,7 @@ permissions:
 jobs:
   npm_deprecate:
     name: Create issue for deprecating npm  packages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Issue Bot Action
         uses: imjohnbo/issue-bot@v3.4.3

@@ -10,7 +10,7 @@ permissions:
 jobs:
   welcome:
     name: Welcome comment
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Check if Babel member
         id: is_babel_member
@@ -42,7 +42,7 @@ jobs:
 
   needs_info:
     name: Needs Info
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Create Needs Info Comment
         uses: babel/actions/create-comment@v2
@@ -84,7 +84,7 @@ jobs:
 
   npm_cache:
     name: Npm Cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Npm Cache Comment
         uses: babel/actions/create-comment@v2
